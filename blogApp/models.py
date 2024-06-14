@@ -14,19 +14,19 @@ class Offer(models.Model):
     OTHER = 'other'
 
     TYPE_CHOICES = [
-        (OFFER, 'Offer'),
-        (DEMAND, 'Demand'),
+        (OFFER, 'Offre'),
+        (DEMAND, 'Demande'),
     ]
 
     CATEGORY_CHOICES = [
-        (PAID, 'Paid'),
-        (UNPAID, 'Unpaid'),
+        (PAID, 'Rémunéré'),
+        (UNPAID, 'Bénévole'),
     ]
 
     GENDER_CHOICES = [
-        (MALE, 'Male'),
-        (FEMALE, 'Female'),
-        (OTHER, 'Other'),
+        (OTHER, 'Non-Binaire'),
+        (FEMALE, 'Femme'),
+        (MALE, 'Homme'),
     ]
 
     type = models.CharField(
@@ -38,7 +38,7 @@ class Offer(models.Model):
     category = models.CharField(
         max_length=255,
         choices=CATEGORY_CHOICES,
-        default=PAID,
+        default=UNPAID,
     )
 
     title = models.CharField(max_length=50, null=False)
@@ -47,7 +47,7 @@ class Offer(models.Model):
     city = models.CharField(max_length=255, blank=True)
     min_age = models.PositiveIntegerField(null=True, blank=True)
     max_age = models.PositiveIntegerField(null=True, blank=True)
-    gender = models.CharField(max_length=255, choices=GENDER_CHOICES, default=OTHER, null=True, blank=True)
+    gender = models.CharField(max_length=255, choices=GENDER_CHOICES, default=None, null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
 

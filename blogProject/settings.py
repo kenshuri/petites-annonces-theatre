@@ -40,7 +40,13 @@ INSTALLED_APPS = [
     'blogApp.apps.BlogappConfig',
     'accounts',
     'django_browser_reload',
+    'crispy_forms',
+    'crispy_tailwind'
 ]
+
+# Crispy forms
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"
 
 # Custom User model
 AUTH_USER_MODEL = 'accounts.CustomUser'

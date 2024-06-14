@@ -1,0 +1,23 @@
+<div class="card card-compact bg-base-100 shadow-xl">
+    <div class="card-body">
+        <h2 class="card-title flex justify-between">
+            {{ offer.title }}
+        <div class="badge badge-secondary">NEW</div>
+        </h2>
+        <p>{{ offer.summary }}</p>
+
+        <div class="flex card-actions justify-end items-center">
+            {% if offer.category == 'paid' %}
+                <div class="badge badge-accent">Rémunéré</div>
+            {% else %}
+                <div class="badge">Bénévole</div>
+            {% endif %}
+            {% if offer.type == 'offer' %}
+                <div class="badge badge-outline">Offre</div>
+            {% else %}
+                <div class="badge badge-outline badge-accent">Demande</div>
+            {% endif %}
+            <a class="btn btn-sm" href="">Voir</a>
+        </div>
+    </div>
+</div>

@@ -21,5 +21,7 @@ import blogApp.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', blogApp.views.index, name='index'),
+    path('add_offer', blogApp.views.add_offer, name='add_offer'),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('__reload__/', include('django_browser_reload.urls')),
 ]
