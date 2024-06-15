@@ -2,7 +2,8 @@
 from django.db import models
 from django.db.models import CheckConstraint, Q
 from accounts.models import CustomUser
-
+import datetime
+import pytz
 
 class Offer(models.Model):
     OFFER = 'offer'
@@ -19,8 +20,8 @@ class Offer(models.Model):
     ]
 
     CATEGORY_CHOICES = [
-        (PAID, 'Rémunéré'),
         (UNPAID, 'Bénévole'),
+        (PAID, 'Rémunéré'),
     ]
 
     GENDER_CHOICES = [
@@ -43,7 +44,7 @@ class Offer(models.Model):
 
     title = models.CharField(max_length=50, null=False)
     summary = models.CharField(max_length=255, null=False)
-    description = models.TextField(blank=True)
+    description = models.TextField(max_length=5000, blank=True)
     city = models.CharField(max_length=255, blank=True)
     min_age = models.PositiveIntegerField(null=True, blank=True)
     max_age = models.PositiveIntegerField(null=True, blank=True)
@@ -51,7 +52,10 @@ class Offer(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
 
-    class Meta:
-        constraints = [
-            CheckConstraint(check=Q(max_age__gte=models.F('min_age')), name='max_age_gte_min_age'),
-        ]
+    @property
+    def recent(self):
+        utc = pytz.UTC
+
+        offer_date = self.created_on
+        threshold = utc.localize(datetime.datetime.now() - datetime.timedelta(weeks=1))
+        return offer_date > threshold

@@ -1,7 +1,8 @@
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Fieldset, Div
+from django_email_blacklist import DisposableEmailChecker
+
+from accounts.models import CustomUser
 from blogApp.models import Offer
 
 class OfferForm(ModelForm):
@@ -25,32 +26,26 @@ class OfferForm(ModelForm):
             'gender': 'Genre'
         }
 
+class SignUpForm(UserCreationForm):
+    class Meta:
+        model = CustomUser
+        fields = ('email', 'password1', 'password2', )
+
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.layout = Layout(
-            Div(
-                Div('type', css_class='w-full'),
-                Div('category', css_class='w-full'),
-                css_class='flex gap-2 w-full'),
-            Fieldset(
-                '',
-                'title',
-                'summary',
-                'description',
-                'city',
-            ),
-            Div(
-                Div('min_age'),
-                Div('max_age'),
-                Div('gender'),
-                css_class='grid grid-cols-2 md:grid-cols-3 gap-2'
-            )
-        )
-        self.helper.form_id = 'id-offerForm'
-        self.helper.form_method = 'post'
-        self.helper.form_action = 'submit_survey'
-        self.helper.add_input(Submit('submit', 'Déposer mon annonce'))
+        super(SignUpForm, self).__init__(*args, **kwargs)
+        self.fields['password1'].help_text = 'Le mot doit faire plus de 8 caractères, ne pas être un mot de passe trop commun et ne pas être entièrement numérique.'
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        email_checker = DisposableEmailChecker()
+        if email_checker.is_disposable(email):
+            self.add_error('email', 'Utilisez une adresse email non-jetable svp')
+        return email
 
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            self.add_error('password2', "Les deux mots de passe sont différents")
+        return password2
 

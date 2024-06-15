@@ -1,0 +1,57 @@
+<form action="{% url 'add_offer' %}" method="post">
+    {% csrf_token %}
+    <div class="grid grid-cols-2 gap-2">
+        <div class="form-control">
+            <label class="label" for="id_type">{{ form.type.label }}*</label>
+            <select class="select select-bordered" name="type" id="id_type">
+                <option value="offer" selected>Offre</option>
+                <option value="demand">Demande</option>
+            </select>
+        </div>
+        <div class="form-control">
+            <label class="label" for="id_category">{{ form.category.label }}*</label>
+            <select class="select select-bordered" name="category" id="id_category">
+                <option value="unpaid" selected>Bénévole</option>
+                <option value="paid">Rémunéré</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-control">
+        <label class="label" for="id_title">{{ form.title.label }}*</label>
+        <input class="input input-bordered type="text" name="title" maxlength="50" required id="id_title">
+    </div>
+    <div class="form-control">
+        <label class="label" for="id_summary">{{ form.summary.label }}*</label>
+        <input class="input input-bordered" type="text" name="summary" maxlength="255" required id="id_summary">
+    </div>
+    <div class="form-control">
+        <label class="label" for="id_description">{{ form.description.label }}</label>
+        <textarea class="textarea textarea-bordered" name="description" rows="5" maxlength="5000" id="id_description"></textarea>
+    </div>
+    <div class="form-control">
+        <label class="label" for="id_city">{{ form.city.label }}</label>
+        <input class="input input-bordered" type="text" name="city" maxlength="255" id="id_city">
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+        <div class="form-control">
+            <label class="label" for="id_min_age">{{ form.min_age.label }}</label>
+            <input class="input input-bordered" type="number" name="min_age" min="0" id="id_min_age">
+            {{ form.min_age.errors }}
+        </div>
+        <div class="form-control">
+            <label class="label" for="id_max_age">{{ form.max_age.label }}</label>
+            <input class="input input-bordered" type="number" name="max_age" min="0" id="id_max_age">
+            <p>{{ form.max_age.errors }}</p>
+        </div>
+        <div class="form-control col-span-2 md:col-span-1">
+            <label class="label" for="id_gender">{{ form.gender.label }}</label>
+            <select class="select select-bordered" name="gender" id="id_gender">
+                <option value="" selected>---------</option>
+                <option value="other">Non-Binaire</option>
+                <option value="female">Femme</option>
+                <option value="male">Homme</option>
+            </select>
+        </div>
+    </div>
+    <input class="btn btn-block mt-2" type="submit" value="Déposer mon annonce">
+</form>
