@@ -1,0 +1,35 @@
+{% extends "blogApp/base.html" %}
+
+{% block title %}
+    Petites Annonces Théâtre
+{% endblock title %}
+
+{% block main %}
+    <div class="bg-base-100 rounded p-2 mt-2">
+        {% if form.errors %}
+            <div class="alert alert-error">
+                Nom d'utilisateur et mot de passe ne correspondent pas. Essaie encore !
+            </div>
+        {% endif %}
+        <form action="{% url 'login' %}" class="form-control" method="post">
+            {% csrf_token %}
+            <div class="form-control">
+                <label for="id_username" class="label">Email</label>
+                <input class="input  input-bordered"
+                       type="email" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="254" required id="id_username" placeholder="abcde@xyz.fr">
+            </div>
+            <div class="form-control">
+                <label for="id_password" class="label">Mot de passe</label>
+                <input class="input  input-bordered"
+                       type="password" name="password" placeholder="*************" autocomplete="current-password" required id="id_password">
+            </div>
+
+            <button class="btn mt-2"
+                    type="submit">Se connecter</button>
+            <input type="hidden" name="next" value="{% url 'index'%}">
+        </form>
+        <button class="btn btn-block btn-accent btn-outline mt-2">
+            <a href="{% url 'signup' %}">S'inscrire</a>
+        </button>
+    </div>
+{% endblock %}
