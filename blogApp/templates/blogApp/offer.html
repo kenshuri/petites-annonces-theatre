@@ -66,7 +66,7 @@
             </div>
         </div>
         <p class="italic text-lg">{{ offer.summary }}</p>
-        <p class="">{{ offer.description | linebreaks}}</p>
+        <p class="">{{ offer.description|linebreaks}}</p>
         {% if offer.author %}
             <div class="flex flex-row justify-end">
                 <p class="italic">Contact: <a href="mailto:{{ offer.author.email }}" class="link">{{ offer.author.email }}</a></p>

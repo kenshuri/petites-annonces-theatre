@@ -1,3 +1,4 @@
+import json
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
@@ -17,6 +18,8 @@ def offer(request, offer_id: int):
 
 @login_required
 def add_offer(request):
+    with open('blogApp/static/fr_cities.json') as f:
+        fr_cities = json.load(f)
     if request.method == 'POST':
         print(request.POST)
         form = OfferForm(request.POST)
@@ -29,7 +32,7 @@ def add_offer(request):
             return redirect('index')
     else:
         form = OfferForm()
-    return render(request, 'blogApp/add_offer.html', {'form': form})
+    return render(request, 'blogApp/add_offer.html', {'form': form, 'fr_cities': fr_cities})
 
 
 @login_required
