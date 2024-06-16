@@ -18,8 +18,8 @@ def offer(request, offer_id: int):
 
 @login_required
 def add_offer(request):
-    with open('blogApp/static/fr_cities.json') as f:
-        fr_cities = json.load(f)
+    # with open('blogApp/static/fr_cities.json') as f:
+    #     fr_cities = json.load(f)
     if request.method == 'POST':
         print(request.POST)
         form = OfferForm(request.POST)
@@ -32,7 +32,7 @@ def add_offer(request):
             return redirect('index')
     else:
         form = OfferForm()
-    return render(request, 'blogApp/add_offer.html', {'form': form, 'fr_cities': fr_cities})
+    return render(request, 'blogApp/add_offer.html', {'form': form})
 
 
 @login_required
