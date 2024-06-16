@@ -5,7 +5,7 @@
 {% endblock title %}
 
 {% block main %}
-    <div class="bg-base-100 rounded p-2 mt-2 flex flex-col gap-2">
+    <div class="bg-base-100 rounded p-4 mt-2 flex flex-col gap-2">
         <div class="flex flex-col gap-1">
             <div class="flex flex-wrap items-center justify-between tracking-wide">
                 <h1 class="font-bold text-xl">{{ offer.title }}</h1>
@@ -66,9 +66,11 @@
             </div>
         </div>
         <p class="italic text-lg">{{ offer.summary }}</p>
-        <p class="">{{ offer.description }}</p>
+        <p class="">{{ offer.description | linebreaks}}</p>
         {% if offer.author %}
-        <p>Contact: {{ offer.author.email }}</p>
+            <div class="flex flex-row justify-end">
+                <p class="italic">Contact: <a href="mailto:{{ offer.author.email }}" class="link">{{ offer.author.email }}</a></p>
+            </div>
         {% endif %}
     </div>
 {% endblock main %}
