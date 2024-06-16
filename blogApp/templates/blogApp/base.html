@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5.0, minimum-scale=0.86">
+    <meta name="description" content="Site de petites annonces pour théâtre amateur. Classified ads site for amateur theatre.">
     <link rel="stylesheet" href="{% static "css/tailwind_daisyui.css" %}">
     <link rel="icon" type="image/png" href="{% static 'mask.svg' %}"/>
     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
@@ -21,18 +22,18 @@
             <a class="gap-1 flex items-center" href="{% url 'index' %}">
                 <div class="avatar">
                     <div class="w-16 md:w-24 rounded">
-                        <img src="{% static 'mask.svg' %}" />
+                        <img alt="logo" src="{% static 'mask.svg' %}" />
                     </div>
                 </div>
                 <span class="flex font-bold text-base md:text-xl">Petites Annonces Théâtre</span>
             </a>
         </div>
         <div class="flex flex-2 gap-2 items-center mr-2">
-            <a href="{% url 'add_offer' %}" class='btn'><i class='fa-solid fa-plus'></i><span class="hidden ml-2 sm:inline-flex">Déposer une </span><span class="ml-2">annonce</span></a>
-            <a href="{% url 'about' %}" class="btn btn-accent "><i class="fa-solid fa-circle-info"></i><span class="hidden md:inline ml-2">à propos</span></a>
+            <a href="{% url 'add_offer' %}" class='btn' aria-label="déposer une annonce"><i class='fa-solid fa-plus'></i><span class="hidden ml-2 sm:inline-flex">Déposer une </span><span class="ml-2">annonce</span></a>
+            <a href="{% url 'about' %}" class="btn btn-accent" aria-label="à propos"><i class="fa-solid fa-circle-info"></i><span class="hidden md:inline ml-2">à propos</span></a>
             {% if user.is_authenticated %}
                 <div class="dropdown dropdown-end">
-                    <div tabindex="0" role="button" class="btn btn-sm btn-circle btn-active">
+                    <div tabindex="0" role="button" class="btn btn-sm btn-circle btn-active" aria-label="utilisateur">
                         <i class="fa-regular fa-user"></i>
                     </div>
                     <ul tabindex="0" class="mt-3 z-[1] p-2 shadow-2xl menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
@@ -42,7 +43,7 @@
                         <form method="post" action="{% url 'logout' %}">
                             <li>
                                 {% csrf_token %}
-                                <button type="submit">
+                                <button type="submit" aria-label="se déconnecter">
                                     <i class="fa-solid fa-right-from-bracket"></i>
                                     Logout
                                 </button>
@@ -52,7 +53,7 @@
                     </ul>
                 </div>
             {% else %}
-                <a href="{% url 'login' %}" class="btn btn-sm btn-circle btn-outline">
+                <a href="{% url 'login' %}" class="btn btn-sm btn-circle btn-outline" aria-label="se connecter">
                     <i class="fa-regular fa-user"></i>
                 </a>
             {% endif %}
@@ -66,7 +67,7 @@
     <aside class="items-center grid-flow-col">
         <div class="avatar">
             <div class="w-16 rounded">
-                <img src="{% static 'mask.svg' %}" />
+                <img alt="logo" src="{% static 'mask.svg' %}" />
             </div>
         </div>
         <div>
