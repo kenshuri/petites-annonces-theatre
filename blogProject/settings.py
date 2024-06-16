@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'blogApp.apps.BlogappConfig',
     'accounts',
     'django_browser_reload',
+    'fontawesomefree'
 ]
 
 # Custom User model

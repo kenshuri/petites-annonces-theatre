@@ -50,7 +50,7 @@ def offer_search(request):
         results = Offer.objects.all()
 
     context = {
-        'all_offers': results
+        'all_offers': results.order_by('-created_on')
     }
 
     return render(request, 'blogApp/partials/offers_partials.html', context)
