@@ -8,6 +8,10 @@
         </h2>
         <p>{{ offer.summary }}</p>
 
+    <div class="flex items-center justify-between">
+        <div class="card card-actions italic">
+            {{ offer.created_on|date:"d/m/Y"}}
+        </div>
         <div class="flex card-actions justify-end items-center">
             {% if offer.category == 'paid' %}
                 <div class="badge badge-accent">Rémunéré</div>
@@ -21,5 +25,6 @@
             {% endif %}
             <a class="btn btn-sm" href="{% url 'offer' offer.id %}">Voir</a>
         </div>
+    </div>
     </div>
 </div>
