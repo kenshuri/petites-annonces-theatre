@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from blogApp.models import Offer
@@ -9,7 +10,12 @@ def index(request):
     return render(request, 'blogApp/index.html', {'all_offers': all_offers})
 
 
+def offer(request, offer_id: int):
+    offer = Offer.objects.get(pk=offer_id)
+    return render(request, 'blogApp/offer.html', {'offer': offer})
 
+
+@login_required
 def add_offer(request):
     if request.method == 'POST':
         print(request.POST)
@@ -18,12 +24,31 @@ def add_offer(request):
             offer = form.save(commit=False)
             # You can set additional fields here if needed
             # For example: offer.author = request.user
+            offer.author = request.user
             offer.save()
             return redirect('index')
     else:
         form = OfferForm()
     return render(request, 'blogApp/add_offer.html', {'form': form})
 
+
+def offer_search(request):
+    search_query = request.POST.get('search')
+    if search_query:
+        results = Offer.objects.filter(title__icontains=search_query) | Offer.objects.filter(summary__icontains=search_query) | Offer.objects.filter(city__icontains=search_query)
+    else:
+        # If no query is provided, return all books
+        results = Offer.objects.all()
+
+    context = {
+        'all_offers': results
+    }
+
+    return render(request, 'blogApp/partials/offers_partials.html', context)
+
+
+def about(request):
+    return render(request, 'blogApp/about.html')
 
 def signup(request):
     if request.method == 'POST':

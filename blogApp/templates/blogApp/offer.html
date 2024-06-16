@@ -1,0 +1,74 @@
+{% extends "blogApp/base.html" %}
+
+{% block title %}
+    Petites Annonces Théâtre
+{% endblock title %}
+
+{% block main %}
+    <div class="bg-base-100 rounded p-2 mt-2 flex flex-col gap-2">
+        <div class="flex flex-col gap-1">
+            <div class="flex flex-wrap items-center justify-between tracking-wide">
+                <h1 class="font-bold text-xl">{{ offer.title }}</h1>
+                <div>{{ offer.created_on }}</div>
+            </div>
+            <div class="flex flex-row flex-wrap gap-2">
+                {% if offer.category == 'paid' %}
+                    <div class="badge badge-accent">Rémunéré</div>
+                {% else %}
+                    <div class="badge">Bénévole</div>
+                {% endif %}
+                {% if offer.type == 'offer' %}
+                    <div class="badge badge-outline">Offre</div>
+                {% else %}
+                    <div class="badge badge-outline badge-accent">Demande</div>
+                {% endif %}
+                {% if offer.city %}
+                    <div class="badge badge-primary">
+                        <i class="fa-solid fa-house"></i>
+                        <span class="ml-2">{{ offer.city }}</span>
+                    </div>
+                {% endif %}
+                {% if offer.min_age or offer.max_age %}
+                    <div class="badge badge-secondary">
+                        <i class="fa-solid fa-user"></i>
+                        {% if offer.min_age and offer.max_age %}
+                            <span class="ml-1">
+                            {{ offer.min_age }}
+                        </span>
+                            <span>-</span>
+                            <span>
+                        {{ offer.max_age }}
+                        </span>
+                        {% endif %}
+                        {% if offer.min_age and not offer.max_age%}
+                            <span class="ml-1">+ de {{ offer.min_age }}</span>
+                        {% endif %}
+                        {% if offer.max and not offer.min_age %}
+                            <span class="ml-1">- de {{ offer.max_age }}</span>
+                        {% endif %}
+                        <span class="ml-1">ans</span>
+                    </div>
+                {% endif %}
+                {% if offer.gender %}
+                    <div class="badge badge-info">
+                        <i class="fa-solid fa-person-half-dress"></i>
+                        <span class="ml-2">
+                    {% if offer.gender == 'female' %}
+                        Femme
+                    {% elif offer.gender == 'male' %}
+                        Homme
+                    {% else %}
+                        Non-Binaire
+                    {% endif %}
+                        </span>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <p class="italic text-lg">{{ offer.summary }}</p>
+        <p class="">{{ offer.description }}</p>
+        {% if offer.author %}
+        <p>Contact: {{ offer.author.email }}</p>
+        {% endif %}
+    </div>
+{% endblock main %}

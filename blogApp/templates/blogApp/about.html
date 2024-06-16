@@ -1,0 +1,59 @@
+{% extends "blogApp/base.html" %}
+
+{% block title %}
+    Petites Annonces Théâtre
+{% endblock title %}
+
+{% block main %}
+    <div class="bg-base-100 rounded p-4 mt-2 flex flex-col">
+        <p class="text-xl">
+            Bienvenue sur <a href="{% url 'index' %}" class="link">petites-annonces-amateur</a>, votre site dédié aux petites annonces pour le théâtre amateur !
+        </p>
+
+        <p class="text-lg font-bold mt-2">
+            Notre Mission
+        </p>
+        <p>
+            Nous avons créé ce site pour répondre à un besoin essentiel : permettre aux passionnés, comédiens amateurs, troupes et metteurs en scènede se rencontrer et collaborer.
+            Que vous cherchiez des comédiens pour votre prochaine production ou que vous soyez un acteur en quête d'une troupe, notre plateforme est là pour vous.
+        </p>
+
+        <p class="text-lg font-bold mt-2">
+            Pourquoi Nous Existons
+        </p>
+        <p>
+            Tout a commencé avec la fermeture du site theatre-contemporain.net, une ressource précieuse pour les annonces théâtrales.
+            La migration vers Artcena, qui se concentre uniquement sur les emplois professionnels, a laissé un vide pour les amateurs.
+            En tant que comédien amateur moi-même, j'ai ressenti ce manque.
+            C'est pourquoi j'ai décidé de créer un espace dédié aux amateurs, pour que la passion du théâtre puisse continuer à prospérer et à s'épanouir.
+        </p>
+
+        <p class="text-lg font-bold mt-2">
+            Comment ça marche
+        </p>
+        <p>
+            Sur <a href="{% url 'index' %}" class="link">petites-annonces-amateur</a>, vous pouvez :
+        <ul>
+            <li>
+                - Publier des annonces : Que vous soyez à la recherche de comédiens pour un projet spécifique ou que vous offriez vos talents de comédien, notre site vous permet de publier et de consulter des annonces gratuitement.
+            </li>
+            <li>
+                - Répondre à des annonces
+            </li>
+        </ul>
+        Et c'est tout ! Pas besoin de faire compliqué quand on peut faire simple : nous nous sommes inspiré du fonctionnement de théâtre-contemporain.net.
+
+        <p class="text-lg font-bold mt-2">
+            Rejoignez-Nous
+        </p>
+        <p>
+            Nous vous invitons à rejoindre notre plateforme et à faire partie de cette aventure théâtrale.
+            Ensemble, nous pouvons créer un espace où la passion du théâtre amateur peut continuer à vivre et à inspirer.
+        </p>
+
+        <p class="mt-2 italic text-lg">
+            Merci de votre visite et bienvenue dans notre communauté théâtrale !
+        </p>
+
+    </div>
+{% endblock main %}

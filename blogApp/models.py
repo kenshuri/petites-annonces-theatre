@@ -50,7 +50,7 @@ class Offer(models.Model):
     max_age = models.PositiveIntegerField(null=True, blank=True)
     gender = models.CharField(max_length=255, choices=GENDER_CHOICES, default=None, null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
+    author = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
 
     @property
     def recent(self):
