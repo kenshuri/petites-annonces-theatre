@@ -32,6 +32,15 @@ def add_offer(request):
     return render(request, 'blogApp/add_offer.html', {'form': form})
 
 
+@login_required
+def delete_offer(request, offer_id: int):
+    if request.user.id == Offer.objects.get(pk=offer_id).author.id:
+        Offer.objects.get(pk=offer_id).delete()
+        return redirect('index')
+    else:
+        return redirect('index')
+
+
 def offer_search(request):
     search_query = request.POST.get('search')
     if search_query:
@@ -45,6 +54,7 @@ def offer_search(request):
     }
 
     return render(request, 'blogApp/partials/offers_partials.html', context)
+
 
 
 def about(request):

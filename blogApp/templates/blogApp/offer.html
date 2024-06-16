@@ -72,5 +72,15 @@
                 <p class="italic">Contact: <a href="mailto:{{ offer.author.email }}" class="link">{{ offer.author.email }}</a></p>
             </div>
         {% endif %}
+        {% if offer.author == request.user %}
+            <div>
+                <a href="{% url 'delete_offer' offer.id %}" class="btn btn-error">
+                    <i class="fa-solid fa-trash"></i>
+                    <span class="ml-2">
+                    Supprimer l'annonce
+                    </span>
+                </a>
+            </div>
+        {% endif %}
     </div>
 {% endblock main %}

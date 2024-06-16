@@ -35,10 +35,16 @@
                         <i class="fa-regular fa-user"></i>
                     </div>
                     <ul tabindex="0" class="mt-3 z-[1] p-2 shadow-2xl menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                        <li class="p-2 underline">
+                            {{ user.email }}
+                        </li>
                         <form method="post" action="{% url 'logout' %}">
                             <li>
                                 {% csrf_token %}
-                                <button type="submit">Logout</button>
+                                <button type="submit">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    Logout
+                                </button>
                                 <input type="hidden" name="next" value="{% url 'index'%}">
                             </li>
                         </form>
