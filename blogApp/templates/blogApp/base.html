@@ -15,8 +15,8 @@
 </head>
 <body class="bg-base-200">
 <header>
-    <div class="flex items-center bg-base-100 max-w-3xl mx-auto lg:max-w-4xl xl:max-w-6xl justify-between gap-2">
-        <div class="flex">
+    <div class="flex bg-base-100 max-w-3xl mx-auto lg:max-w-4xl xl:max-w-6xl justify-between gap-2">
+        <div class="flex flex-1">
             <a class="gap-1 flex items-center" href="{% url 'index' %}">
                 <div class="avatar">
                     <div class="w-16 md:w-24 rounded">
@@ -26,12 +26,12 @@
                 <span class="flex font-bold text-base md:text-xl">Petites Annonces Théâtre</span>
             </a>
         </div>
-        <div class="flex sm:mr-0 gap-2 items-center">
+        <div class="flex flex-2 gap-2 items-center mr-1">
             <a href="{% url 'add_offer' %}" class='btn'><i class='fa-solid fa-plus'></i><span class="hidden ml-2 sm:inline-flex">Déposer une </span><span class="ml-2">annonce</span></a>
             <a href="{% url 'about' %}" class="btn btn-accent "><i class="fa-solid fa-circle-info"></i><span class="hidden md:inline ml-2">à propos</span></a>
             {% if user.is_authenticated %}
                 <div class="dropdown dropdown-end">
-                    <div tabindex="0" role="button" class="btn btn-sm btn-circle mr-3 sm:mr-2 btn-active">
+                    <div tabindex="0" role="button" class="btn btn-sm btn-circle btn-active">
                         <i class="fa-regular fa-user"></i>
                     </div>
                     <ul tabindex="0" class="mt-3 z-[1] p-2 shadow-2xl menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
@@ -45,7 +45,7 @@
                     </ul>
                 </div>
             {% else %}
-                <a href="{% url 'login' %}" class="btn btn-sm btn-circle btn-outline mr-2.5">
+                <a href="{% url 'login' %}" class="btn btn-sm btn-circle btn-outline">
                     <i class="fa-regular fa-user"></i>
                 </a>
             {% endif %}
