@@ -26,7 +26,7 @@
                 <span class="flex font-bold text-base md:text-xl">Petites Annonces Théâtre</span>
             </a>
         </div>
-        <div class="flex flex-2 gap-2 items-center mr-1">
+        <div class="flex flex-2 gap-2 items-center mr-2">
             <a href="{% url 'add_offer' %}" class='btn'><i class='fa-solid fa-plus'></i><span class="hidden ml-2 sm:inline-flex">Déposer une </span><span class="ml-2">annonce</span></a>
             <a href="{% url 'about' %}" class="btn btn-accent "><i class="fa-solid fa-circle-info"></i><span class="hidden md:inline ml-2">à propos</span></a>
             {% if user.is_authenticated %}
