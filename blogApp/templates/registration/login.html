@@ -28,8 +28,8 @@
                     type="submit">Se connecter</button>
             <input type="hidden" name="next" value="{% url 'index'%}">
         </form>
-        <button class="btn btn-block btn-accent btn-outline mt-2">
-            <a href="{% url 'signup' %}">S'inscrire</a>
-        </button>
+        <a href="{% url 'signup' %}" class="btn btn-block btn-accent btn-outline mt-2">
+            S'inscrire
+        </a>
     </div>
 {% endblock %}
