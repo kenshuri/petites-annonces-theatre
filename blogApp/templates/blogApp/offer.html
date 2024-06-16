@@ -8,7 +8,7 @@
     <div class="bg-base-100 rounded p-4 mt-2 flex flex-col gap-2">
         <div class="flex flex-col gap-1">
             <div class="flex flex-wrap items-center justify-between tracking-wide">
-                <h1 class="font-bold text-xl">{{ offer.title }}</h1>
+                <h1 class="font-bold text-xl">{{ offer.title|capfirst }}</h1>
                 <div>{{ offer.created_on }}</div>
             </div>
             <div class="flex flex-row flex-wrap gap-2">
