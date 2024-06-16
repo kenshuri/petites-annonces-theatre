@@ -1,17 +1,17 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from blogApp.models import Offer
 from blogApp.forms import OfferForm, SignUpForm
 
 # Create your views here.
 def index(request):
-    all_offers = Offer.objects.all().order_by('-created_on')
+    all_offers = Offer.objects.filter(filled=False).order_by('-created_on')
     return render(request, 'blogApp/index.html', {'all_offers': all_offers})
 
 
 def offer(request, offer_id: int):
-    offer = Offer.objects.get(pk=offer_id)
+    offer = get_object_or_404(Offer, pk=offer_id)
     return render(request, 'blogApp/offer.html', {'offer': offer})
 
 
@@ -40,14 +40,24 @@ def delete_offer(request, offer_id: int):
     else:
         return redirect('index')
 
+@login_required
+def fill_offer(request, offer_id: int):
+    if request.user.id == Offer.objects.get(pk=offer_id).author.id:
+        offer = get_object_or_404(Offer, pk=offer_id)
+        offer.filled = True
+        offer.save()
+        return redirect('index')
+    else:
+        redirect('index')
+
 
 def offer_search(request):
     search_query = request.POST.get('search')
     if search_query:
-        results = Offer.objects.filter(title__icontains=search_query) | Offer.objects.filter(summary__icontains=search_query) | Offer.objects.filter(city__icontains=search_query)
+        results = Offer.objects.filter(filled=False).filter(title__icontains=search_query) | Offer.objects.filter(filled=False).filter(summary__icontains=search_query) | Offer.objects.filter(city__icontains=search_query)
     else:
         # If no query is provided, return all books
-        results = Offer.objects.all()
+        results = Offer.objects.filter(filled=False)
 
     context = {
         'all_offers': results.order_by('-created_on')

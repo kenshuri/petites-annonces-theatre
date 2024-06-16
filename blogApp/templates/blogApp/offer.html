@@ -73,13 +73,23 @@
             </div>
         {% endif %}
         {% if offer.author == request.user %}
-            <div>
-                <a href="{% url 'delete_offer' offer.id %}" class="btn btn-error">
-                    <i class="fa-solid fa-trash"></i>
-                    <span class="ml-2">
+            <div class="flex gap-2">
+                <div>
+                    <a href="{% url 'delete_offer' offer.id %}" class="btn btn-success">
+                        <i class="fa-solid fa-handshake-simple"></i>
+                        <span class="ml-2">
+                    Annonce pourvue
+                    </span>
+                    </a>
+                </div>
+                <div>
+                    <a href="{% url 'delete_offer' offer.id %}" class="btn btn-error">
+                        <i class="fa-solid fa-trash"></i>
+                        <span class="ml-2">
                     Supprimer l'annonce
                     </span>
-                </a>
+                    </a>
+                </div>
             </div>
         {% endif %}
     </div>

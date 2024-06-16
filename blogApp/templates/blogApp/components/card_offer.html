@@ -1,7 +1,7 @@
 <div class="card card-compact bg-base-100 shadow-xl">
     <div class="card-body">
         <h2 class="card-title flex justify-between">
-            {{ offer.title }}
+            {{ offer.title|capfirst}}
             {% if offer.recent %}
             <div class="badge badge-secondary">NEW</div>
             {% endif %}
