@@ -53,6 +53,9 @@ class Offer(models.Model):
     filled = models.BooleanField(default=False)
     author = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
 
+    def __str__(self):
+        return f'{self.title} - {self.author} - {self.created_on.strftime("%Y-%m-%d, %H:%M")}'
+
     @property
     def recent(self):
         utc = pytz.UTC
@@ -60,3 +63,4 @@ class Offer(models.Model):
         offer_date = self.created_on
         threshold = utc.localize(datetime.datetime.now() - datetime.timedelta(weeks=1))
         return offer_date > threshold
+

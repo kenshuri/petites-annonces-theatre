@@ -20,12 +20,12 @@ import blogApp.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('', blogApp.views.index, name='index'),
     path('add_offer', blogApp.views.add_offer, name='add_offer'),
     path('about', blogApp.views.about, name='about'),
     path('offer/<int:offer_id>', blogApp.views.offer, name='offer'),
     path('delete_offer/<int:offer_id>', blogApp.views.delete_offer, name='delete_offer'),
-    path('accounts/', include('django.contrib.auth.urls')),
     path('signup/', blogApp.views.signup, name='signup'),
     path('__reload__/', include('django_browser_reload.urls')),
 ]
