@@ -14,7 +14,8 @@ class OfferForm(ModelForm):
                   'city',
                   'min_age',
                   'max_age',
-                  'gender']
+                  'gender',
+                  'show_author_mail']
         labels = {
             'type': "Type d'annonce",
             'category': 'Catégorie',
@@ -23,7 +24,8 @@ class OfferForm(ModelForm):
             'city': 'Ville',
             'min_age': 'Âge apparent minimal',
             'max_age': 'Âge apparent maximal',
-            'gender': 'Genre'
+            'gender': 'Genre',
+            'show_author_mail': 'Afficher email'
         }
 
 class SignUpForm(UserCreationForm):

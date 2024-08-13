@@ -21,7 +21,6 @@ def add_offer(request):
     # with open('blogApp/static/fr_cities.json') as f:
     #     fr_cities = json.load(f)
     if request.method == 'POST':
-        print(request.POST)
         form = OfferForm(request.POST)
         if form.is_valid():
             offer = form.save(commit=False)
@@ -32,7 +31,24 @@ def add_offer(request):
             return redirect('index')
     else:
         form = OfferForm()
-    return render(request, 'blogApp/add_offer.html', {'form': form})
+    return render(request, 'blogApp/add_offer.html', {'form': form, 'offer_id': -1})
+
+@login_required
+def update_offer(request, offer_id: int):
+    if request.method == 'POST':
+        offer = get_object_or_404(Offer, id=offer_id)
+        if offer.author != request.user:
+            return redirect('index')
+        form = OfferForm(request.POST, instance=offer)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        offer = get_object_or_404(Offer, id=offer_id)
+        if offer.author != request.user:
+            return redirect('index')
+        form = OfferForm(instance=offer)
+    return render(request, 'blogApp/add_offer.html', {'form': form, 'offer_id': offer_id})
 
 
 @login_required

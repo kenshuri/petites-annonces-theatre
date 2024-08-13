@@ -14,14 +14,14 @@
         </div>
         <div class="flex card-actions justify-end items-center">
             {% if offer.category == 'paid' %}
-                <div class="badge badge-accent">Rémunéré</div>
+                <div class="badge badge-secondary">Rémunéré</div>
             {% else %}
                 <div class="badge">Bénévole</div>
             {% endif %}
             {% if offer.type == 'offer' %}
-                <div class="badge badge-outline">Offre</div>
+                <div class="badge badge-outline flex gap-0.5"><i class="fa-solid fa-people-group"></i><i class="fa-solid fa-magnifying-glass-arrow-right"></i><i class="fa-solid fa-person-half-dress"></i></div>
             {% else %}
-                <div class="badge badge-outline badge-accent">Demande</div>
+                <div class="badge badge-outline badge-accent flex gap-0.5"><i class="fa-solid fa-person-half-dress"></i><i class="fa-solid fa-magnifying-glass-arrow-right"></i><i class="fa-solid fa-people-group"></i></div>
             {% endif %}
             <a class="btn btn-sm" href="{% url 'offer' offer.id %}">Voir</a>
         </div>

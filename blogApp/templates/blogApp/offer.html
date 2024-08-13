@@ -18,9 +18,9 @@
                     <div class="badge">Bénévole</div>
                 {% endif %}
                 {% if offer.type == 'offer' %}
-                    <div class="badge badge-outline">Offre</div>
+                    <div class="badge badge-outline flex gap-0.5"><i class="fa-solid fa-people-group"></i><i class="fa-solid fa-magnifying-glass-arrow-right"></i><i class="fa-solid fa-person-half-dress"></i></div>
                 {% else %}
-                    <div class="badge badge-outline badge-accent">Demande</div>
+                    <div class="badge badge-outline badge-accent flex gap-0.5"><i class="fa-solid fa-person-half-dress"></i><i class="fa-solid fa-magnifying-glass-arrow-right"></i><i class="fa-solid fa-people-group"></i></div>
                 {% endif %}
                 {% if offer.city %}
                     <div class="badge badge-primary">
@@ -67,13 +67,21 @@
         </div>
         <p class="italic text-lg">{{ offer.summary }}</p>
         <p class="">{{ offer.description|linebreaks}}</p>
-        {% if offer.author %}
+        {% if offer.author and offer.show_author_mail %}
             <div class="flex flex-row justify-end">
                 <p class="italic">Contact: <a href="mailto:{{ offer.author.email }}" class="link">{{ offer.author.email }}</a></p>
             </div>
         {% endif %}
         {% if offer.author == request.user %}
-            <div class="flex gap-2">
+            <div class="flex gap-2 flex-wrap">
+                <div>
+                    <a href="{% url 'update_offer' offer.id %}" class="btn">
+                        <i class="fa-solid fa-pen"></i>
+                        <span class="ml-2">
+                    Modifier l'annonce
+                    </span>
+                    </a>
+                </div>
                 <div>
                     <a href="{% url 'delete_offer' offer.id %}" class="btn btn-success">
                         <i class="fa-solid fa-handshake-simple"></i>

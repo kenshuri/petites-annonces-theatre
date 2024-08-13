@@ -25,6 +25,7 @@ urlpatterns = [
     path('add_offer', blogApp.views.add_offer, name='add_offer'),
     path('about', blogApp.views.about, name='about'),
     path('offer/<int:offer_id>', blogApp.views.offer, name='offer'),
+    path('update_offer/<int:offer_id>', blogApp.views.update_offer, name='update_offer'),
     path('delete_offer/<int:offer_id>', blogApp.views.delete_offer, name='delete_offer'),
     path('signup/', blogApp.views.signup, name='signup'),
     path('__reload__/', include('django_browser_reload.urls')),
